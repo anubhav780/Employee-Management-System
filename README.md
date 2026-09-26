@@ -186,8 +186,6 @@ Do not use real employee records or production credentials when testing the appl
 
 
 
-Replace these example screenshot paths with screenshots of the actual application. Remove any sections for screenshots that you have not added.
-
 ## Security
 
 - Keep database credentials and authentication secrets out of the repository.
