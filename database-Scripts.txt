@@ -1,1 +1,646 @@
 ﻿
+use master;
+go
+drop database if exists SonalikaTractorsDB;
+go
+
+CREATE DATABASE SonalikaTractorsDB;
+GO
+
+USE SonalikaTractorsDB;
+GO
+
+DROP TRIGGER if exists trg_Employee_Insert;
+GO
+
+DROP TRIGGER if exists trg_Employee_Update;
+GO
+
+DROP TRIGGER if exists trg_Employee_Delete;
+GO
+
+
+
+CREATE TABLE Department
+(
+    DeptID INT PRIMARY KEY,
+    DeptName NVARCHAR(100) NOT NULL
+);
+
+
+
+CREATE TABLE Employee
+(
+    EmpID INT IDENTITY(1001,1) PRIMARY KEY,
+
+    EmpName NVARCHAR(100) NOT NULL,
+
+    DeptID INT NOT NULL,
+
+    IsActive BIT DEFAULT 1,
+
+    FOREIGN KEY(DeptID)
+    REFERENCES Department(DeptID)
+);
+
+
+
+CREATE TABLE EmployeeLogin
+(
+    LoginID INT IDENTITY(1,1) PRIMARY KEY,
+
+    EmpID INT NOT NULL UNIQUE,
+
+    EmpCode NVARCHAR(50) UNIQUE NOT NULL,
+
+    PasswordHash NVARCHAR(100) NOT NULL,
+
+    Role NVARCHAR(20) NOT NULL,
+
+    IsActive BIT DEFAULT 1,
+
+    FOREIGN KEY(EmpID)
+    REFERENCES Employee(EmpID)
+    ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE Attendance
+(
+    AttendanceID INT IDENTITY(1,1) PRIMARY KEY,
+
+    EmpID INT NOT NULL,
+
+    AttendanceDate DATE NOT NULL,
+
+    Status NVARCHAR(20) NOT NULL,
+
+    FOREIGN KEY(EmpID)
+    REFERENCES Employee(EmpID)
+    ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE LeaveRequest
+(
+    LeaveID INT IDENTITY(1,1) PRIMARY KEY,
+
+    EmpID INT NOT NULL,
+
+    LeaveType NVARCHAR(30),
+
+    FromDate DATE,
+
+    ToDate DATE,
+
+    Reason NVARCHAR(200),
+
+    Status NVARCHAR(20),
+
+    FOREIGN KEY(EmpID)
+    REFERENCES Employee(EmpID)
+    ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE Salary
+(
+    SalaryID INT IDENTITY(1,1) PRIMARY KEY,
+
+    EmpID INT NOT NULL,
+
+    BasicSalary DECIMAL(10,2),
+
+    Bonus DECIMAL(10,2),
+
+    Deduction DECIMAL(10,2),
+
+    NetSalary AS (BasicSalary + Bonus - Deduction),
+
+    FOREIGN KEY(EmpID)
+    REFERENCES Employee(EmpID)
+    ON DELETE CASCADE
+);
+INSERT INTO Department (DeptID, DeptName)
+VALUES
+(101,'Production'),
+(102,'Human Resource'),
+(103,'Sales'),
+(104,'Finance'),
+(105,'Service');
+INSERT INTO Employee (EmpName, DeptID)
+VALUES
+('Amit Sharma',101),
+('Rahul Verma',102),
+('Manpreet Singh',103),
+('Rohit Kumar',104),
+('Karan Mehta',105),
+('Ankit Sharma',101),
+('Deepak Kumar',102),
+('Sahil Gupta',103),
+('Mohit Arora',104),
+('Gurpreet Singh',105),
+('Abhishek Jain',101),
+('Tarun Kumar',102),
+('Ajay Sharma',103),
+('Harsh Verma',104),
+('Vikas Kumar',105),
+('Nitin Sharma',101),
+('Rakesh Singh',102),
+('Arjun Kapoor',103),
+('Yash Sharma',104),
+('Rajat Gupta',105);
+
+
+INSERT INTO EmployeeLogin
+(EmpID, EmpCode, PasswordHash, Role, IsActive)
+VALUES
+(1001,'EMP1001','123','Admin',1),
+(1002,'EMP1002','123','Employee',1),
+(1003,'EMP1003','123','Employee',1),
+(1004,'EMP1004','123','Employee',1),
+(1005,'EMP1005','123','Employee',1),
+(1006,'EMP1006','123','Employee',1),
+(1007,'EMP1007','123','Employee',1),
+(1008,'EMP1008','123','Employee',1),
+(1009,'EMP1009','123','Employee',1),
+(1010,'EMP1010','123','Employee',1),
+(1011,'EMP1011','123','Employee',1),
+(1012,'EMP1012','123','Employee',1),
+(1013,'EMP1013','123','Employee',1),
+(1014,'EMP1014','123','Employee',1),
+(1015,'EMP1015','123','Employee',1),
+(1016,'EMP1016','123','Employee',1),
+(1017,'EMP1017','123','Employee',1),
+(1018,'EMP1018','123','Employee',1),
+(1019,'EMP1019','123','Employee',1),
+(1020,'EMP1020','123','Employee',1);
+
+INSERT INTO Attendance
+(EmpID,AttendanceDate,Status)
+VALUES
+(1001,'2026-07-01','Present'),
+(1002,'2026-07-01','Absent'),
+(1003,'2026-07-01','Present'),
+(1004,'2026-07-01','Present'),
+(1005,'2026-07-01','Leave'),
+(1006,'2026-07-01','Present'),
+(1007,'2026-07-01','Present'),
+(1008,'2026-07-01','Absent'),
+(1009,'2026-07-01','Present'),
+(1010,'2026-07-01','Present'),
+(1011,'2026-07-02','Present'),
+(1012,'2026-07-02','Present'),
+(1013,'2026-07-02','Leave'),
+(1014,'2026-07-02','Present'),
+(1015,'2026-07-02','Absent'),
+(1016,'2026-07-02','Present'),
+(1017,'2026-07-02','Present'),
+(1018,'2026-07-02','Present'),
+(1019,'2026-07-02','Leave'),
+(1020,'2026-07-02','Present'),
+(1001,'2026-07-03','Present'),
+(1002,'2026-07-03','Present'),
+(1003,'2026-07-03','Present'),
+(1004,'2026-07-03','Present'),
+(1005,'2026-07-03','Present'),
+(1006,'2026-07-03','Absent'),
+(1007,'2026-07-03','Present'),
+(1008,'2026-07-03','Present'),
+(1009,'2026-07-03','Present'),
+(1010,'2026-07-03','Leave');
+
+INSERT INTO LeaveRequest
+(EmpID,LeaveType,FromDate,ToDate,Reason,Status)
+VALUES
+(1002,'Medical','2026-07-10','2026-07-12','Fever','Approved'),
+(1005,'Casual','2026-07-15','2026-07-15','Personal Work','Pending'),
+(1008,'Medical','2026-07-18','2026-07-20','Hospital','Approved'),
+(1011,'Casual','2026-07-22','2026-07-23','Family Function','Pending'),
+(1014,'Emergency','2026-07-24','2026-07-24','Emergency','Approved'),
+(1016,'Medical','2026-07-25','2026-07-26','Health Issue','Rejected'),
+(1019,'Casual','2026-07-27','2026-07-28','Vacation','Pending'),
+(1003,'Medical','2026-07-29','2026-07-30','Surgery','Approved'),
+(1007,'Emergency','2026-08-01','2026-08-02','Emergency','Pending'),
+(1013,'Casual','2026-08-03','2026-08-04','Personal','Approved'),
+(1015,'Medical','2026-08-05','2026-08-06','Checkup','Pending'),
+(1017,'Casual','2026-08-07','2026-08-07','Marriage','Approved'),
+(1018,'Emergency','2026-08-08','2026-08-08','Urgent Work','Rejected'),
+(1020,'Medical','2026-08-09','2026-08-10','Health','Approved'),
+(1001,'Casual','2026-08-11','2026-08-12','Festival','Pending');
+
+INSERT INTO Salary
+(EmpID,BasicSalary,Bonus,Deduction)
+VALUES
+(1001,50000,5000,1000),
+(1002,45000,4000,500),
+(1003,52000,4500,700),
+(1004,47000,3000,600),
+(1005,49000,3500,500),
+(1006,51000,4500,800),
+(1007,43000,2500,300),
+(1008,48000,4000,700),
+(1009,46000,3000,400),
+(1010,54000,5000,900),
+(1011,50000,4500,600),
+(1012,44000,2800,400),
+(1013,47000,3500,500),
+(1014,51000,4500,800),
+(1015,49500,3200,500),
+(1016,53000,5000,900),
+(1017,47000,3000,400),
+(1018,48000,3500,600),
+(1019,51000,4500,700),
+(1020,55000,6000,1000);
+
+SELECT * FROM Department;
+
+SELECT * FROM Employee;
+
+SELECT * FROM EmployeeLogin;
+
+SELECT * FROM Attendance;
+
+SELECT * FROM LeaveRequest;
+
+SELECT * FROM Salary;
+
+go
+CREATE PROCEDURE sp_GetAllEmployees
+AS
+BEGIN
+    SELECT
+        E.EmpID,
+        E.EmpName,
+        E.Salary,
+        D.DeptName,
+        E.IsActive
+    FROM Employee E
+    INNER JOIN Department D
+        ON E.DeptID = D.DeptID;
+END;
+GO
+--EXEC sp_GetAllEmployees;
+
+---
+go
+CREATE PROCEDURE sp_GetEmployeeById
+    @EmpID INT
+AS
+BEGIN
+    SELECT *
+    FROM Employee
+    WHERE EmpID = @EmpID;
+END;
+GO
+--EXEC sp_GetEmployeeById 1001;
+
+--
+go
+CREATE PROCEDURE sp_AddEmployee
+(
+    @EmpName NVARCHAR(100),
+    @Salary DECIMAL(10,2),
+    @DeptID INT
+)
+AS
+BEGIN
+    INSERT INTO Employee
+    (
+        EmpName,
+        Salary,
+        DeptID
+    )
+    VALUES
+    (
+        @EmpName,
+        @Salary,
+        @DeptID
+    );
+END;
+GO
+--EXEC sp_AddEmployee
+--'Virat Kohli',
+--70000,
+--101;
+
+--
+go
+CREATE PROCEDURE sp_UpdateEmployee
+(
+    @EmpID INT,
+    @EmpName NVARCHAR(100),
+    @Salary DECIMAL(10,2),
+    @DeptID INT
+)
+AS
+BEGIN
+    UPDATE Employee
+
+    SET
+        EmpName=@EmpName,
+        Salary=@Salary,
+        DeptID=@DeptID
+
+    WHERE EmpID=@EmpID;
+END;
+GO
+/*
+EXEC sp_UpdateEmployee
+1001,
+'Amit Sharma',
+55000,
+102;
+*/
+--
+go
+CREATE PROCEDURE sp_DeleteEmployee
+(
+    @EmpID INT
+)
+AS
+BEGIN
+    DELETE FROM Employee
+    WHERE EmpID=@EmpID;
+END;
+GO
+--EXEC sp_DeleteEmployee 1021;
+
+--
+go
+CREATE PROCEDURE sp_GetDepartments
+AS
+BEGIN
+    SELECT *
+    FROM Department;
+END;
+GO
+
+--
+go
+CREATE PROCEDURE sp_AddDepartment
+(
+    @DeptID INT,
+    @DeptName NVARCHAR(100)
+)
+AS
+BEGIN
+    INSERT INTO Department
+    VALUES
+    (
+        @DeptID,
+        @DeptName
+    );
+END;
+GO
+
+--
+go
+CREATE PROCEDURE sp_UpdateDepartment
+(
+    @DeptID INT,
+    @DeptName NVARCHAR(100)
+)
+AS
+BEGIN
+    UPDATE Department
+
+    SET DeptName=@DeptName
+
+    WHERE DeptID=@DeptID;
+END;
+GO
+
+--
+go
+CREATE PROCEDURE sp_DeleteDepartment
+(
+    @DeptID INT
+)
+AS
+BEGIN
+    DELETE FROM Department
+    WHERE DeptID=@DeptID;
+END;
+GO
+
+--
+go
+CREATE PROCEDURE sp_Login
+(
+    @EmpCode NVARCHAR(20),
+    @Password NVARCHAR(100)
+)
+AS
+BEGIN
+
+    SELECT *
+
+    FROM EmployeeLogin
+
+    WHERE
+        EmpCode=@EmpCode
+        AND PasswordHash=@Password
+        AND IsActive= 1;
+
+END;
+GO
+
+--
+CREATE TABLE EmployeeAudit
+(
+    AuditID INT IDENTITY(1,1) PRIMARY KEY,
+
+    EmpID INT,
+
+    ActionType NVARCHAR(20),
+
+    ActionDate DATETIME DEFAULT GETDATE(),
+
+    Description NVARCHAR(300)
+);
+go
+
+--
+go
+CREATE TRIGGER trg_Employee_Insert
+ON Employee
+AFTER INSERT
+AS
+BEGIN
+
+    INSERT INTO EmployeeAudit
+    (
+        EmpID,
+        ActionType,
+        Description
+    )
+
+    SELECT
+
+        EmpID,
+
+        'INSERT',
+
+        'New Employee Added : ' + EmpName
+
+    FROM inserted;
+
+END;
+GO
+
+INSERT INTO Employee
+(
+    EmpName,
+    Salary,
+    DeptID
+)
+
+VALUES
+(
+'Rohit Sharma',
+60000,
+101
+);
+
+SELECT * FROM EmployeeAudit;
+
+--
+go
+CREATE TRIGGER trg_Employee_Update
+ON Employee
+AFTER UPDATE
+AS
+BEGIN
+
+    INSERT INTO EmployeeAudit
+    (
+        EmpID,
+        ActionType,
+        Description
+    )
+
+    SELECT
+
+        EmpID,
+
+        'UPDATE',
+
+        'Employee Details Updated'
+
+    FROM inserted;
+
+END;
+GO
+
+--
+go
+CREATE TRIGGER trg_Employee_Delete
+ON Employee
+AFTER DELETE
+AS
+BEGIN
+
+    INSERT INTO EmployeeAudit
+    (
+        EmpID,
+        ActionType,
+        Description
+    )
+
+    SELECT
+
+        EmpID,
+
+        'DELETE',
+
+        'Employee Deleted'
+
+    FROM deleted;
+
+END;
+GO
+
+--
+go
+CREATE VIEW vw_EmployeeDetails
+AS
+
+SELECT
+
+E.EmpID,
+
+E.EmpName,
+
+D.DeptName,
+
+E.Salary,
+
+E.IsActive
+
+FROM Employee E
+
+INNER JOIN Department D
+
+ON E.DeptID=D.DeptID;
+GO
+
+--
+go
+CREATE VIEW vw_AttendanceReport
+AS
+
+SELECT
+
+E.EmpName,
+
+A.AttendanceDate,
+
+A.Status
+
+FROM Employee E
+
+INNER JOIN Attendance A
+
+ON E.EmpID=A.EmpID;
+GO
+
+--
+go
+CREATE VIEW vw_SalaryReport
+AS
+
+SELECT
+
+E.EmpName,
+
+S.BasicSalary,
+
+S.Bonus,
+
+S.Deduction,
+
+S.NetSalary
+
+FROM Employee E
+
+INNER JOIN Salary S
+
+ON E.EmpID=S.EmpID;
+GO
+
+--
+DROP TRIGGER trg_Employee_Insert;
+GO
+
+DROP TRIGGER trg_Employee_Update;
+GO
+
+DROP TRIGGER trg_Employee_Delete;
+GO
+SELECT name
+FROM sys.triggers
+WHERE parent_id = OBJECT_ID('Employee');

@@ -1,1 +1,30 @@
-﻿
+﻿# .NET build output
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Local development configuration
+**/appsettings.Development.json
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+
+# IDE settings
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Local database files
+*.mdf
+*.ldf
+*.bak

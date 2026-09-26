@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SonalikaAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+625eb86b97507132c2201247a179deecf0ce8ee5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d37f9ebbebca43c0ad83065238b5f8d72ebd74b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("SonalikaAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SonalikaAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
