@@ -122,7 +122,7 @@ Employee-Management-System/
 ```bash
 git clone https://github.com/YOUR-USERNAME/Sonalika-Employee-Management-System.git
 ```
-```text
+```
 Navigate to the project directory:
 
 ```bash
