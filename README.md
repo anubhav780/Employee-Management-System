@@ -82,8 +82,7 @@ Employee-Management-System/
 │   ├── Leave Management.png
 │   └── Salary Management.png
 │
-├── wwwroot/
-│   ├── css/
+|── ├── css/
 │   ├── js/
 │   └── [HTML files]
 │
@@ -120,7 +119,7 @@ Employee-Management-System/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/Sonalika-Employee-Management-System.git
+git clone https://github.com/anubhav780/Sonalika-Employee-Management-System.git
 ```
 
 Navigate to the project directory:
@@ -194,7 +193,7 @@ The exact API routes and HTTP methods are defined in the corresponding controlle
 
 The application uses Microsoft SQL Server for storing application data.
 
-Database setup scripts are provided in the `Database/Scripts` directory, if included.
+Database setup scripts are provided in the `database-Scripts` directory, if included.
 
 Configure your own local database connection string before running the backend.
 
