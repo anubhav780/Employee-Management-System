@@ -114,7 +114,7 @@ Employee-Management-System/
 - Microsoft SQL Server.
 - SQL Server Management Studio.
 - Git.
-
+```
 ## Installation and Setup
 
 ### 1. Clone the Repository
@@ -122,13 +122,13 @@ Employee-Management-System/
 ```bash
 git clone https://github.com/YOUR-USERNAME/Sonalika-Employee-Management-System.git
 ```
-```
+
 Navigate to the project directory:
 
 ```bash
 cd Sonalika-Employee-Management-System
 ```
-```text
+
 ### 2. Set Up the Database
 
 1. Open SQL Server Management Studio.
@@ -148,13 +148,13 @@ Restore the required packages:
 ```bash
 dotnet restore
 ```
-```text
+
 Build the application:
 
 ```bash
 dotnet build
 ```
-```text
+
 ### 4. Run the Backend
 
 Navigate to the backend project directory and execute:
@@ -162,7 +162,7 @@ Navigate to the backend project directory and execute:
 ```bash
 dotnet run
 ```
-```text
+
 The API will start at the address configured in the project.
 
 ### 5. Run the Frontend
@@ -172,7 +172,7 @@ Open the frontend using the local development setup configured for the project.
 Configure the frontend API base URL to match the address of the running backend.
 
 If the frontend is hosted by ASP.NET Core, use the configured static-file hosting setup.
-```
+
 
 ## API Modules
 
