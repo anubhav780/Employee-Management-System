@@ -46,30 +46,54 @@ The application provides an administrative interface for managing employee infor
 ## Project Structure
 
 ```text
+## Project Structure
+
+```text
 Employee-Management-System/
 │
-├── Backend/
-│   ├── Controllers/
-│   ├── Data/
-│   ├── Models/
-│   ├── Properties/
-│   ├── Program.cs
-│   └── SonalikaAPI.csproj
+├── Controllers/
+│   ├── AttendanceController.cs
+│   ├── DashboardController.cs
+│   ├── DepartmentController.cs
+│   ├── EmployeeController.cs
+│   ├── LeaveRequestController.cs
+│   ├── LoginController.cs
+│   └── SalaryController.cs
 │
-├── Frontend/
-│   ├── css/
-│   ├── js/
-│   ├── images/
-│   ├── sonalikalogin.html
-│   └── dashboard.html
+├── Data/
+│   └── AppDbContext.cs
 │
-├── Database/
-│   └── Scripts/
+├── Models/
+│   ├── Attendance.cs
+│   ├── Dashboard.cs
+│   ├── Department.cs
+│   ├── Employee.cs
+│   ├── EmployeeLogin.cs
+│   ├── LeaveRequest.cs
+│   ├── LoginRequest.cs
+│   └── Salary.cs
 │
 ├── Screenshots/
+│   ├── loginpage.png
+│   ├── dashboard.png
+│   ├── Employeemangement.png
+│   ├── departmentmangement.png
+│   ├── Attendance Management.png
+│   ├── Leave Management.png
+│   └── Salary Management.png
+│
+├── wwwroot/
+│   ├── css/
+│   ├── js/
+│   └── [HTML files]
 │
 ├── .gitignore
-└── README.md
+├── README.md
+├── appsettings.json
+├── Program.cs
+├── SonalikaAPI.csproj
+└── SonalikaAPI.http
+```
 ```
 
 ## Application Workflow
