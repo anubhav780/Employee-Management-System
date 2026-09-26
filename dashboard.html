@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        <img src="logodashboard.png" alt="">
+        
+    </div>
+
+    <ul>
+
+        <li class="active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </li>
+
+        <li id="employeeMenu">
+            <i class="fas fa-users"></i>
+            <span>Employees</span>
+        </li>
+
+        <li id="departmentMenu">
+            <i class="fas fa-building"></i>
+            <span>Departments</span>
+        </li>
+
+        <li id="attendanceMenu">
+            <i class="fas fa-calendar-check"></i>
+            <span>Attendance</span>
+        </li>
+
+        <li id="leaveMenu">
+            <i class="fas fa-file-signature"></i>
+            <span>Leave Requests</span>
+        </li>
+
+        <li id="salaryMenu">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Salary</span>
+        </li>
+
+        <li id="logout">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </li>
+
+    </ul>
+
+</div>
+
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h1>Admin Dashboard</h1>
+
+        <div class="admin">
+
+            <span id="loggedInUser"></span>
+
+        </div>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <i class="fas fa-users"></i>
+            <h2 id="totalEmployees">0</h2>
+            <p>Total Employees</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-building"></i>
+            <h2 id="totalDepartments">0</h2>
+            <p>Departments</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-calendar-check"></i>
+            <h2 id="attendancePercent">0</h2>
+            <p>Attendance</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-file-signature"></i>
+            <h2 id="pendingLeaves">0</h2>
+            <p>Pending Leaves</p>
+        </div>
+
+    </div>
+
+    <div class="content">
+
+        <h2>Welcome Admin</h2>
+
+        <p>
+
+            Welcome to Sonalika Employee Management System.
+
+            Select any module from the left sidebar.
+
+        </p>
+
+    </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
