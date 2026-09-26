@@ -178,14 +178,11 @@ Do not use real employee records or production credentials when testing the appl
 ## Screenshots
 
 ### Login Page
+![Login Page](Screenshots/loginpage.png)
 
+### Dashboard
+![Dashboard](Screenshots/dashboard.png)
 
-
-### Admin Dashboard
-
-
-
-### Employee Management
 
 
 
